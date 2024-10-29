@@ -6,3 +6,21 @@ df.info()
 df.describe()
 sns.jointplot(x="Time on App", y="Yearly Amount Spent", data=df,alpha=0.5)
 sns.pairplot(df,kind='scatter',plot_kws={'alpha':0.4})
+sns.lmplot(x='Length of Membership',
+           y='Yearly Amount Spent',
+           data=df,
+           scatter_kws={'alpha':0.4})
+from sklearn.model_selection import train_test_split
+x=df[['Avg. Session Length','Time on App','Time on Website','Length of Membership']]
+y=df['Yearly Amount Spent']
+X_train,X_test,y_train,y_test= train_test_split(x,y,test_size=0.3,random_state=42)
+#Training Our Model 
+from sklearn.linear_model import LinearRegression
+lm=LinearRegression()
+lm.fit(X_train,y_train)
+lm.coef_
+cdf=pd.DataFrame(lm.coef_,x.columns,columns=['coef'])
+print(cdf) 
+predictions=lm.predict(X_test)
+predictions
+
