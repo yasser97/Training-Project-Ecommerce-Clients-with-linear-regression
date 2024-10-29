@@ -1,0 +1,8 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+df = pd.read_csv("/kaggle/input/focusing-on-mobile-app-or-website/Ecommerce Customers")
+df.info()
+df.describe()
+sns.jointplot(x="Time on App", y="Yearly Amount Spent", data=df,alpha=0.5)
+sns.pairplot(df,kind='scatter',plot_kws={'alpha':0.4})
